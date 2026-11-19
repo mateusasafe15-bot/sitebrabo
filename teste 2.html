@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lista</title>
+  <link rel="stylesheet" href="../style/teste-2.css">
+</head>
+<body>
+  <div class="container">
+    <div class="flex">
+    <p>Lista de bananas(os)(es)</p>
+    <input placeholder="insira sua banana (la ele)" class="js-banana input-style"
+      onkeydown="keyEnter(event)">
+    <button onclick="save();" class="button-style">Add</button>
+
+    <button class="js-destroy button-destroy" onclick="
+      reset();
+    ">Destruir</button>
+
+    <button class="js-save button-save" onclick="
+      saveStorage();
+    "
+    >Salvar</button>
+    </div>
+          <div class="js-texto div-style"></div>
+  </div>
+  <div class="div-que-tive-que-criar-pq-a-poha-do-css-e-limitado"></div>
+  <img class="banana" src="../pngtree-banana-vector-png-image_3278227.jpg" alt="Banana">
+  <script>
+    function keyEnter (event) {
+      if (event.key === 'Enter') {
+        save();
+      }
+    }
+    const lista = JSON.parse(localStorage.getItem('lista')) || [
+
+    ];
+    render();
+    function render() {
+      
+
+      let listaHTML = '';
+
+      for (let i = 0; i < lista.length; i++) {
+        const objetoLista = lista[i];
+        const html = `<div>${objetoLista}</div>`
+
+        listaHTML += html;
+      }
+      document.querySelector('.js-texto')
+        .innerHTML = listaHTML;
+    }
+ 
+    function save() {
+      const inputElement = document.querySelector('.js-banana');
+      const name = inputElement.value;
+
+      lista.push(name);
+    
+      render();
+      inputElement.value = '';
+    }
+
+    function reset () {
+      let listaHTML = '';
+
+      lista.splice(listaHTML)
+      render();
+      return;
+
+      saveStorage();
+    }
+
+    function saveStorage () {
+      localStorage.setItem('lista', JSON.stringify(lista));
+    }
+  </script>
+</body>
+</html>
